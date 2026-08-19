@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Build
+build/
+dist/
+
+# Models and training artifacts
+*.mlpackage/
+*.mlmodel
+*.mlmodelc/
+*.pt
+*.pth
+*.safetensors
+checkpoints/
+runs/
+wandb/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
