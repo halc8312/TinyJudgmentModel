@@ -1,0 +1,75 @@
+{
+  "kind": "host_smoke_benchmark",
+  "warning": "Host CPU timings do not predict iPhone latency; use the real-device protocol before making claims.",
+  "python": "3.13.5",
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.41",
+  "torch_version": "2.10.0+cpu",
+  "device": "cpu",
+  "config": {
+    "vocab_size": 256,
+    "d_model": 96,
+    "n_layers": 3,
+    "n_heads": 4,
+    "memory_key_dim": 12,
+    "local_kernel_size": 4,
+    "ffn_multiplier": 2.0,
+    "dropout": 0.0,
+    "max_seq_len": 2076,
+    "tie_embeddings": true,
+    "event_threshold": 0.0
+  },
+  "parameters": {
+    "komorebi": 285408,
+    "transformer": 301728
+  },
+  "rows": [
+    {
+      "model": "komorebi",
+      "context_tokens_before_measurement": 64,
+      "median_decode_latency_ms": 1.785795,
+      "state_bytes_at_context": 31104
+    },
+    {
+      "model": "komorebi",
+      "context_tokens_before_measurement": 256,
+      "median_decode_latency_ms": 1.9546320000000001,
+      "state_bytes_at_context": 31104
+    },
+    {
+      "model": "komorebi",
+      "context_tokens_before_measurement": 1024,
+      "median_decode_latency_ms": 2.0935525,
+      "state_bytes_at_context": 31104
+    },
+    {
+      "model": "komorebi",
+      "context_tokens_before_measurement": 2048,
+      "median_decode_latency_ms": 1.7049625,
+      "state_bytes_at_context": 31104
+    },
+    {
+      "model": "transformer",
+      "context_tokens_before_measurement": 64,
+      "median_decode_latency_ms": 1.0966105,
+      "state_bytes_at_context": 147456
+    },
+    {
+      "model": "transformer",
+      "context_tokens_before_measurement": 256,
+      "median_decode_latency_ms": 1.437213,
+      "state_bytes_at_context": 589824
+    },
+    {
+      "model": "transformer",
+      "context_tokens_before_measurement": 1024,
+      "median_decode_latency_ms": 1.28969,
+      "state_bytes_at_context": 2359296
+    },
+    {
+      "model": "transformer",
+      "context_tokens_before_measurement": 2048,
+      "median_decode_latency_ms": 1.603803,
+      "state_bytes_at_context": 4718592
+    }
+  ]
+}

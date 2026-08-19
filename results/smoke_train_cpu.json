@@ -1,0 +1,50 @@
+{
+  "kind": "synthetic_associative_recall_smoke_test",
+  "warning": "This is a correctness smoke test, not evidence of general language-model superiority.",
+  "torch_version": "2.10.0+cpu",
+  "device": "cpu",
+  "config": {
+    "vocab_size": 26,
+    "d_model": 48,
+    "n_layers": 2,
+    "n_heads": 4,
+    "memory_key_dim": 8,
+    "local_kernel_size": 4,
+    "ffn_multiplier": 1.5,
+    "dropout": 0.0,
+    "max_seq_len": 64,
+    "tie_embeddings": true,
+    "event_threshold": 0.0
+  },
+  "task": {
+    "batch_size": 24,
+    "n_pairs": 5,
+    "n_keys": 12,
+    "learning_rate": 0.003,
+    "seed": 17
+  },
+  "runs": [
+    {
+      "model": "komorebi",
+      "parameters": 41424,
+      "steps": 120,
+      "elapsed_seconds": 13.40147558800004,
+      "steps_per_second": 8.954237853289118,
+      "initial_loss": 3.3128273487091064,
+      "final_loss": 2.2556331157684326,
+      "tail_mean_loss": 2.152599060535431,
+      "tail_mean_accuracy": 0.2520833320915699
+    },
+    {
+      "model": "transformer",
+      "parameters": 40656,
+      "steps": 120,
+      "elapsed_seconds": 1.4483648249999987,
+      "steps_per_second": 82.85205352180526,
+      "initial_loss": 3.353342056274414,
+      "final_loss": 2.3443212509155273,
+      "tail_mean_loss": 2.044659686088562,
+      "tail_mean_accuracy": 0.3062500014901161
+    }
+  ]
+}
