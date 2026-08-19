@@ -101,7 +101,7 @@ pip install -e '.[mobile]'
 python scripts/export_coreml.py --output komorebi.mlpackage
 ```
 
-The exporter currently exposes recurrent tensors as explicit inputs and outputs. Converting them into in-place Core ML / Core AI state and measuring a real iPhone is a tracked milestone, not a completed claim.
+The exporter first tries `torch.export` and automatically falls back to TorchScript conversion and exposes recurrent tensors as explicit inputs and outputs. Converting them into in-place Core ML / Core AI state and measuring a real iPhone is a tracked milestone, not a completed claim.
 
 ## Research map
 

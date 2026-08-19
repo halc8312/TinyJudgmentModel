@@ -43,3 +43,9 @@ Negative results are first-class data. Entries should state the failed expectati
 **Observed:** a 400-step paired run was terminated before completion and produced no result artifact.
 
 **Decision:** add checkpointed experiments and avoid interpreting incomplete runs. The immediate priority is kernel efficiency, not simply increasing wall time.
+
+## F-005 — the original exporter depended on a deprecated PyTorch capture path
+
+**Observed:** the initial Core ML scaffold used `torch.jit.trace`; PyTorch 2.10 emits a deprecation warning and directs users toward `torch.export`.
+
+**Decision:** try `torch.export` first, automatically retry with TorchScript because Core ML Tools has longer-standing support for that path, and keep full Core ML conversion as an unverified macOS milestone.

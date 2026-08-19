@@ -77,7 +77,10 @@ class CausalDepthwiseConv1d(nn.Module):
         return torch.zeros(batch_size, self.channels, self.state_width, device=device, dtype=dtype)
 
     def step(self, x: Tensor, state: Tensor) -> tuple[Tensor, Tensor]:
-        if x.ndim != 2 or x.shape[-1] != self.channels:
+        # Core ML export uses a fixed-shape TorchScript trace.  Keep the
+        # developer-facing validation in eager mode without baking a Python
+        # tensor-to-bool guard into the traced graph.
+        if not torch.jit.is_tracing() and (x.ndim != 2 or x.shape[-1] != self.channels):
             raise ValueError(f"x must have shape [batch, {self.channels}]")
         if self.state_width == 0:
             y = x * self.weight[:, 0] + self.bias

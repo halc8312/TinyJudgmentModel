@@ -83,3 +83,18 @@ Interpretation:
 ### Interrupted long training run
 
 A 400-step rerun exceeded the execution window and was terminated without a result file. This reinforces the need for progress checkpoints and a parallel/chunkwise kernel. It is not counted as model evidence.
+
+### Apple-export capture preflight
+
+The one-token wrapper was captured with `torch.export.export` on PyTorch 2.10.0 and executed through the resulting `ExportedProgram`.
+
+Observed output shapes for a one-layer test model:
+
+```text
+logits: (1, 64)
+local:  (1, 32, 3)
+fast:   (1, 4, 4, 8)
+slow:   (1, 4, 4, 8)
+```
+
+The full `coremltools.convert` step was not run in this Linux environment. Apple’s current conversion guide supports both TorchScript capture and `torch.export`; because PyTorch 2.10 emits a deprecation warning for `torch.jit.trace`, the scaffold now tries `torch.export` first and automatically retries with TorchScript when conversion coverage requires it.

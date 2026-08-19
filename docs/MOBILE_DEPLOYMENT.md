@@ -6,7 +6,7 @@ Demonstrate a useful language model that runs entirely on-device with bounded co
 
 ## Current artifact
 
-`scripts/export_coreml.py` traces a one-token KOMOREBI step and exposes each recurrent tensor as an explicit input and output. It is an interoperability scaffold only.
+`scripts/export_coreml.py` captures a one-token KOMOREBI step by trying `torch.export` first and falling back to TorchScript when needed, then exposes each recurrent tensor as an explicit input and output. It is an interoperability scaffold only.
 
 ## Deployment stages
 
